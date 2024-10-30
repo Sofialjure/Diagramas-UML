@@ -1,0 +1,41 @@
+@startuml Diagrama Objeto 
+
+object Usuario1 {
+    nombre = Sofia
+    apellido = Aljure
+    email = sofialjureg@gmail.com
+    contrasenia = 01010101
+}
+object Producto1 {
+    idProducto = 001
+    nombrePoducto = olla imusa
+    precioProducto = 324.500
+    stock = 10
+
+}
+object Inventario1 {
+    idIventario = 01
+    Productos = [Producto1]
+    cantidadDisponible = 25
+    actualizarStock()
+
+}
+object DetalleFactura1 {
+    idDetalleFactura = 1
+    cantidad = 2 
+    precioUnitario = 324.500
+    Producto =  producto1
+
+}
+object Factura1 {
+    idFactura = 5001
+    fecha = 30/10/2024 
+    total = 649.000
+    calcularTotal()
+
+}
+Usuario1 --> Factura1
+Factura1 --> DetalleFactura1
+DetalleFactura1 --> Producto1
+Inventario1 --> Producto1
+@enduml
