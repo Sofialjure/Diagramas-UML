@@ -1,0 +1,16 @@
+@startuml Diagrama De Despliegue 
+node "Servidor Web" {
+    component "Servidor de Aplicaciones" <<application>>
+}
+
+node "Dispositivo Usuario" {
+    component "Frontend"
+}
+
+node "Servidor de Base de Datos" {
+    database "Base de Datos"
+}
+
+"Servidor de Aplicaciones" --> "Base de Datos"
+"Frontend" --> "Servidor de Aplicaciones"
+@enduml
