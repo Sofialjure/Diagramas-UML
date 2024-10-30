@@ -1,0 +1,12 @@
+@startuml Diagrama Componentes 
+
+package "Sistema de Carrito de Compras" {
+    component [Base de Datos] <<database>>
+    component [Servidor de Aplicaciones] <<component>>
+    component [Frontend] <<component>>
+}
+
+[Base de Datos] -up-> [Servidor de Aplicaciones] : Consultas SQL
+[Servidor de Aplicaciones] --> [Frontend] : JSON API
+
+@enduml
