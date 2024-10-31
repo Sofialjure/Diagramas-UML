@@ -1,0 +1,40 @@
+@startuml Diagrama De Paquete 
+
+package "Sistema de Carrito de Compras" {
+
+ package "Gestión de Usuarios" {
+    class Usuario
+}
+
+ package "Gestión de Productos" {
+    class Producto
+    class Inventario
+}
+
+package "Facturación" {
+    class Factura
+    class DetalleFactura
+}
+
+package "Backend" {
+    class "Servidor de Aplicaciones"
+    class "Base de Datos"
+}
+
+package "Frontend" {
+    class "Interfaz de Usuario"
+}
+
+"Gestión de Usuarios" --> "Facturación" : realiza
+"Gestión de Productos" --> "Facturación" : contiene
+"Facturación" --> "Backend" : consulta y almacena
+"Backend" --> "Frontend" : JSON API
+"Frontend" --> "Backend" : realiza peticiones
+
+Usuario --> Factura : "1..*"
+Factura --> DetalleFactura : "1..*"
+DetalleFactura --> Producto : "1"
+Inventario --> Producto : "0..*"
+}
+
+@enduml
