@@ -1,0 +1,30 @@
+@startuml Diagrama De Secuencia 
+actor Usuario
+participant "Interfaz de Usuario" as UI
+participant "Servidor de Aplicaciones" as Servidor
+participant "Base de Datos" as BD
+participant Inventario
+participant Producto
+participant Factura
+participant DetalleFactura
+
+Usuario -> UI: Inicia sesión
+UI -> Servidor: Solicitud de autenticación
+Servidor -> BD: Consulta credenciales
+BD --> Servidor: Respuesta autenticación
+Servidor --> UI: Resultado autenticación
+
+Usuario -> UI: Añade Producto al carrito
+UI -> Servidor: Solicitud de stock Producto
+Servidor -> BD: Verifica stock en Inventario
+BD --> Servidor: Retorna disponibilidad
+Servidor --> UI: Actualiza carrito
+
+Usuario -> UI: Realiza compra
+UI -> Servidor: Solicitud de Factura
+Servidor -> Factura: Genera Factura
+Factura -> DetalleFactura: Añade Detalles de Factura
+DetalleFactura -> Producto: Relaciona con Producto
+Servidor -> BD: Guarda Factura y DetalleFactura
+Servidor --> UI: Confirmación de compra
+@enduml
