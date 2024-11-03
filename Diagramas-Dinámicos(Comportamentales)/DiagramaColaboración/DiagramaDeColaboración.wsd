@@ -1,0 +1,23 @@
+@startuml Diagrama De Colaboración
+skinparam actorPadding 10
+skinparam rectanglePadding 10
+
+actor Usuario
+rectangle "Sistema de Carrito de Compras" {
+rectangle "Interfaz de Usuario" as UI
+rectangle "Servidor de Aplicaciones" as Servidor
+rectangle "Base de Datos" as BD
+rectangle Factura
+rectangle DetalleFactura
+rectangle Producto
+
+Usuario -> UI : (1) Realizar compra
+UI -> Servidor : (2) Solicitud de factura
+Servidor -> BD : (3) Crear factura
+BD --> Factura : (4) Guardar factura
+Factura -> DetalleFactura : (5) Crear DetalleFactura
+DetalleFactura -> Producto : (6) Vincular producto
+Factura -> BD : (7) Almacenar DetalleFactura
+Servidor --> UI : (8) Confirmación de compra
+}
+@enduml
