@@ -1,0 +1,20 @@
+@startuml Diagrama De Estado-Transición
+
+[*] --> Inicio_de_sesion : Usuario inicia sesión
+
+Inicio_de_sesion --> Navegar_productos : Autenticación exitosa
+Navegar_productos --> Producto_agregado_al_carrito : Seleccionar producto
+Producto_agregado_al_carrito --> Verificar_disponibilidad
+
+Verificar_disponibilidad --> Carrito_actualizado : Producto disponible
+Verificar_disponibilidad --> Notificar_falta_de_stock : Producto no disponible
+
+Carrito_actualizado --> Proceder_a_compra : Confirmar carrito
+Proceder_a_compra --> Generar_factura
+Generar_factura --> Guardar_detalles_compra
+Guardar_detalles_compra --> Actualizar_inventario
+Actualizar_inventario --> Compra_completada : Confirmación enviada al usuario
+
+Compra_completada --> [*]
+
+@enduml
