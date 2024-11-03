@@ -1,0 +1,18 @@
+@startuml Diagrama De Actividad
+
+start
+:Iniciar sesión;
+:Seleccionar producto;
+:Agregar al carrito;
+if (Producto disponible?) then (Sí)
+  :Actualizar carrito;
+  :Proceder a compra;
+  :Generar Factura;
+  :Guardar Factura y Detalles;
+  :Actualizar Inventario;
+  :Confirmación de compra;
+else (No)
+  :Notificar falta de stock;
+endif
+stop
+@enduml
