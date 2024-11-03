@@ -1,0 +1,71 @@
+@startuml Tiempo
+title Diagrama de Tiempo 
+
+participant Usuario
+participant Interfaz_de_Usuario as IU
+participant Servidor_de_Aplicaciones as SA
+participant Base_de_Datos as BD
+participant Inventario as INV
+
+Usuario -> IU : IniciarSesion()
+note right of Usuario : t1: Usuario inicia sesión
+IU -> SA : SolicitarAutenticacion()
+note right of IU : t2: Solicita autenticación
+SA -> BD : ConsultarCredenciales()
+note right of SA : t3: Consulta credenciales
+BD --> SA : ResultadoAutenticacion
+note right of BD : t4: Devuelve resultado
+SA --> IU : AutenticacionExitosa()
+note right of SA : t5: Autenticación exitosa
+IU --> Usuario : SesionIniciada()
+note right of IU : t6: Sesión iniciada
+
+== Exploración de Productos ==
+Usuario -> IU : NavegarProductos()
+note right of Usuario : t7: Usuario navega productos
+IU -> SA : SolicitarProductos()
+note right of IU : t8: Solicita lista de productos
+SA -> BD : ConsultarProductos()
+note right of SA : t9: Consulta productos en BD
+BD --> SA : ListaProductos()
+note right of BD : t10: Devuelve lista de productos
+SA --> IU : EnviarProductos()
+note right of SA : t11: Envía productos a IU
+IU --> Usuario : MostrarProductos()
+note right of IU : t12: Muestra productos al usuario
+
+== Agregar Producto al Carrito ==
+Usuario -> IU : AgregarProductoCarrito()
+note right of Usuario : t13: Agrega producto al carrito
+IU -> SA : VerificarDisponibilidad()
+note right of IU : t14: Verifica disponibilidad
+SA -> INV : ConsultarStock()
+note right of SA : t15: Consulta stock en inventario
+INV --> SA : StockDisponible()
+note right of INV : t16: Confirma disponibilidad
+SA --> IU : ProductoDisponible()
+note right of SA : t17: Notifica disponibilidad
+IU --> Usuario : ProductoAgregado()
+note right of IU : t18: Producto agregado al carrito
+
+== Confirmación de Compra ==
+Usuario -> IU : ConfirmarCarrito()
+note right of Usuario : t19: Confirma carrito
+IU -> SA : GenerarFactura()
+note right of IU : t20: Genera factura
+SA -> BD : AlmacenarFactura()
+note right of SA : t21: Almacena factura en BD
+SA -> BD : CrearDetallesFactura()
+note right of SA : t22: Crea detalles de factura
+
+== Actualización de Inventario ==
+SA -> INV : ActualizarStock()
+note right of SA : t23: Actualiza inventario
+INV --> SA : StockActualizado()
+note right of INV : t24: Confirma actualización
+SA --> IU : ConfirmacionCompra()
+note right of SA : t25: Confirma compra
+IU --> Usuario : CompraCompletada()
+note right of IU : t26: Notifica compra completada
+
+@enduml
