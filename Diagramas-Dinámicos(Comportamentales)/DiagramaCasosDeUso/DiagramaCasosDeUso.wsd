@@ -1,0 +1,19 @@
+@startuml Diagrama De Caso De Uso
+
+actor Usuario
+actor Administrador
+
+Usuario --> (Iniciar sesión)
+Usuario --> (Explorar productos)
+Usuario --> (Agregar producto al carrito)
+Usuario --> (Verificar disponibilidad)
+Usuario --> (Confirmar carrito)
+Usuario --> (Realizar compra)
+
+(Realizar compra) --> (Actualizar inventario) : incluye
+Usuario --> (Ver historial de compras)
+
+Administrador --> (Gestionar productos)
+Administrador --> (Gestionar inventario)
+
+@enduml
